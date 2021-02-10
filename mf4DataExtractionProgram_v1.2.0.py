@@ -1,3 +1,4 @@
+#%%
 from mf4parser import mdfSubset as ms
 from tkinter import Tk,filedialog,simpledialog
 import pandas as pd
@@ -5,7 +6,7 @@ import pathlib
 from time import sleep
 import numpy as np
 from matplotlib import pyplot as plt
-
+#%%
 gui = Tk()
 gui.withdraw()
 #os.system('cls')
@@ -252,11 +253,11 @@ for frame in range(len(dt)):
     dt_add.append(addSignals(dt[frame]))
 #%%
 for frames in range(len(dt_add)):
-    fname = subset[frames].name+'.csv'
+    fname = srcFiles[0].parent.as_posix().replace('/','\\')+'\\'+subset[frames].name+'.csv'
     dt_add[frames].to_csv(fname,index_label='timestamps')  
     print(f'CSV Files created successfully for file {subset[frames].name}')
 
 #%%
-plt.plot(dt['AyVse'])
-plt.plot(dt['AyCmf']-1)
-plt.show()
+
+
+
