@@ -62,21 +62,21 @@ def addSignals(dt,param):
     
     #%% convert signal enumerations
     try:
-        ehSpdlimValue0 = dt['EhrSpdlim_0'].map(param['map_ehrSpdlim']) # radius reported by map for current position
+        dt['ehSpdlimValue0'] = dt['EhrSpdlim_0'].map(param['map_ehrSpdlim']) # radius reported by map for current position
         #dt['ehSpdlimValue1'] = dt['EhrSpdlim_1'].map(map_ehrSpdlim) # radius reported for next shape point - not used now
         if (dt['EhrSpdlimUnits'].values[0] == 0): # 0 is KPH
-            dt['ehSpdlimValue0_KPH'] = ehSpdlimValue0
+            dt['ehSpdlimValue0_KPH'] = dt['ehSpdlimValue0']
         elif (dt['EhrSpdlimUnits'].values[0] == 1): # 0 is MPH
-            dt['ehSpdlimValue0_MPH'] = ehSpdlimValue0
+            dt['ehSpdlimValue0_MPH'] = dt['ehSpdlimValue0']
         
         
         dt['EhrRoadClass_0_Map'] = dt['EhrRoadClass_0'].map(param['map_ehrFuncRoadClass']) # functional road class enum
         
-        TSRSpdLimit_int = pd.to_numeric(dt['TSRSpdLimit'],errors='coerce') # tsr speed limit non numeric will be set to nan
+        dt['TSRSpdLimit_int'] = pd.to_numeric(dt['TSRSpdLimit'],errors='coerce') # tsr speed limit non numeric will be set to nan
         if (dt['TSRSpdLimitUnits'].values[0] == 'Km/h'): 
-            dt['TSRSpdLimitKPH'] = TSRSpdLimit_int        
+            dt['TSRSpdLimitKPH'] =  dt['TSRSpdLimit_int']       
         elif(dt['TSRSpdLimitUnits'].values[0] == 'Mph'):
-                dt['TSRSpdLimitMPH'] = TSRSpdLimit_int 
+                dt['TSRSpdLimitMPH'] =  dt['TSRSpdLimit_int'] 
         
         dt['CcfSpdoCalPercentScaleMap'] = dt['CcfSpdoCalPercentScale'].map(param['map_spdoCalPerScale']) # spd cal for ind speed 
         dt['CcfSpdoCalkmhOffsetMap'] = dt['CcfSpdoCalkmhOffset'].map(param['map_spdoCalOffset']) # spd offset for ind speed
